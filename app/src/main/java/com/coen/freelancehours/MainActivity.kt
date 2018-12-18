@@ -1,32 +1,42 @@
 package com.coen.freelancehours
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import android.widget.FrameLayout
+import com.coen.freelancehours.ui.*
 
 class MainActivity : AppCompatActivity() {
+
+    var content: FrameLayout? = null
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_hours -> {
-                message.setText(R.string.title_hours)
+                val fragment = HoursFragment.newInstance()
+                addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_project -> {
-                message.setText(R.string.title_projects)
+                val fragment = ProjectFragment.newInstance()
+                addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                message.setText(R.string.title_dashboard)
+                val fragment = DashboardFragment.newInstance()
+                addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_tax -> {
-                message.setText(R.string.title_tax)
+                val fragment = TaxFragment.newInstance()
+                addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
-                message.setText(R.string.title_profile)
+                val fragment = UserFragment.newInstance()
+                addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -37,6 +47,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        content = findViewById(R.id.content)
+        val navigation = findViewById<BottomNavigationView>(R.id.navigation)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.selectedItemId = R.id.navigation_dashboard
+
+        val fragment = DashboardFragment.newInstance()
+        addFragment(fragment)
+    }
+
+    /**
+     * add/replace fragment in container [framelayout]
+     */
+    @SuppressLint("PrivateResource")
+    private fun addFragment(fragment: Fragment) {
+        supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(
+                        R.anim.design_bottom_sheet_slide_in,
+                        R.anim.design_bottom_sheet_slide_out
+                )
+                .replace(R.id.content, fragment, fragment.javaClass.simpleName)
+                .addToBackStack(fragment.javaClass.simpleName)
+                .commit()
     }
 }
