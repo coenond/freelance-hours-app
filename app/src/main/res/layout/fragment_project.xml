@@ -3,29 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.ProjectFragment">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_project_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/textViewHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Project"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:drawableTop="@drawable/ic_home_black_24dp"/>
-
-        <EditText
-            android:id="@+id/editTextHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            />
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_margin="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />]
 
 </FrameLayout>

@@ -7,8 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import com.coen.freelancehours.R
+import com.coen.freelancehours.api.FreelanceHoursApiService
+import com.coen.freelancehours.model.Project
 
 class HoursFragment : Fragment() {
+
+    lateinit var freelanceHoursApiService: FreelanceHoursApiService
+    lateinit var project: Project
+
     /**
      * Initialize newInstance for passing paameters
      */

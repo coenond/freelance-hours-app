@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.view.Window
 import android.widget.FrameLayout
 import com.coen.freelancehours.ui.*
 
@@ -14,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     var content: FrameLayout? = null
     lateinit var title: String
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_hours -> {
                 val fragment = HoursFragment.newInstance()
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         content = findViewById(R.id.content)
         val navigation = findViewById<BottomNavigationView>(R.id.navigation)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         navigation.selectedItemId = R.id.navigation_dashboard
 
         setTitle("Dashboard")
