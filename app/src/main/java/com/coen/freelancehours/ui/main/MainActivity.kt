@@ -1,4 +1,4 @@
-package com.coen.freelancehours
+package com.coen.freelancehours.ui.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,9 +6,17 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
-import com.coen.freelancehours.ui.*
+import com.coen.freelancehours.R
+import com.coen.freelancehours.databinding.ActivityMainBinding
+import com.coen.freelancehours.base.BaseActivity
+import com.coen.freelancehours.ui.dashboard.DashboardFragment
+import com.coen.freelancehours.ui.hours.HoursFragment
+import com.coen.freelancehours.ui.project.ProjectFragment
+import com.coen.freelancehours.ui.project.ProjectViewModel
+import com.coen.freelancehours.ui.tax.TaxFragment
+import com.coen.freelancehours.ui.user.UserFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
     var content: FrameLayout? = null
     lateinit var title: String

@@ -1,4 +1,4 @@
-package com.coen.freelancehours.ui
+package com.coen.freelancehours.ui.tax
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,20 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import com.coen.freelancehours.R
-import com.coen.freelancehours.api.FreelanceHoursApiService
-import com.coen.freelancehours.model.Project
 
-class HoursFragment : Fragment() {
-
-    lateinit var freelanceHoursApiService: FreelanceHoursApiService
-    lateinit var project: Project
-
+class TaxFragment : Fragment() {
     /**
      * Initialize newInstance for passing paameters
      */
     companion object {
-        fun newInstance(): HoursFragment {
-            val fragmentHome = HoursFragment()
+        fun newInstance(): TaxFragment {
+            val fragmentHome = TaxFragment()
             val args = Bundle()
             fragmentHome.arguments = args
             return fragmentHome
@@ -34,7 +28,7 @@ class HoursFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_hours, container, false)
+        return inflater.inflate(R.layout.fragment_tax, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

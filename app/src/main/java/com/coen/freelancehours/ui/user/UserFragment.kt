@@ -1,4 +1,4 @@
-package com.coen.freelancehours.ui
+package com.coen.freelancehours.ui.user
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

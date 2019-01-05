@@ -1,4 +1,4 @@
-package com.coen.freelancehours.ui
+package com.coen.freelancehours.ui.project
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -9,7 +9,7 @@ import com.coen.freelancehours.R
 import com.coen.freelancehours.model.Project
 import kotlinx.android.synthetic.main.item_project.view.*
 
-class ProjectAdapter(private val projects : ArrayList<Project>, private val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class ProjectAdapter(private var projects : ArrayList<Project>, private val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemCount(): Int { return projects.size }
 
@@ -20,6 +20,11 @@ class ProjectAdapter(private val projects : ArrayList<Project>, private val cont
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvProjectName.text = projects[position].name
         holder.tvHourRate.text = projects[position].hourRate
+    }
+
+    fun update(items : ArrayList<Project>) {
+        this.projects = items
+        notifyDataSetChanged()
     }
 }
 
