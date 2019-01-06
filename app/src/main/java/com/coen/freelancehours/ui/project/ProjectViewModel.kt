@@ -3,7 +3,7 @@ package com.coen.freelancehours.ui.project
 import android.app.Application
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import com.coen.freelancehours.api.response.ProjectAllResponse
+import com.coen.freelancehours.api.response.project.ProjectAllResponse
 import com.coen.freelancehours.base.BaseViewModel
 import com.coen.freelancehours.model.Project
 import com.coen.freelancehours.repository.ProjectRepository

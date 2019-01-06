@@ -7,12 +7,9 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
 import com.coen.freelancehours.R
-import com.coen.freelancehours.databinding.ActivityMainBinding
-import com.coen.freelancehours.base.BaseActivity
 import com.coen.freelancehours.ui.dashboard.DashboardFragment
-import com.coen.freelancehours.ui.hours.HoursFragment
+import com.coen.freelancehours.ui.hour.HourFragment
 import com.coen.freelancehours.ui.project.ProjectFragment
-import com.coen.freelancehours.ui.project.ProjectViewModel
 import com.coen.freelancehours.ui.tax.TaxFragment
 import com.coen.freelancehours.ui.user.UserFragment
 
@@ -24,7 +21,7 @@ class MainActivity: AppCompatActivity() {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_hours -> {
-                val fragment = HoursFragment.newInstance()
+                val fragment = HourFragment.newInstance()
                 addFragment(fragment)
                 setTitle(item.title)
                 return@OnNavigationItemSelectedListener true

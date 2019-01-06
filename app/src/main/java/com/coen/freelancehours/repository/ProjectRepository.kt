@@ -1,9 +1,8 @@
 package com.coen.freelancehours.repository
 
 import com.coen.freelancehours.api.FreelanceHoursApi
-import com.coen.freelancehours.api.FreelanceHoursApiService
-import com.coen.freelancehours.api.response.ProjectAllResponse
-import com.coen.freelancehours.api.response.ProjectSingleResponse
+import com.coen.freelancehours.api.response.project.ProjectAllResponse
+import com.coen.freelancehours.api.response.project.ProjectSingleResponse
 import io.reactivex.Single
 
 class ProjectRepository {

@@ -19,11 +19,10 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
     override fun getLayoutId(): Int = R.layout.fragment_project
 
     lateinit var projectAdapter: ProjectAdapter
-//    private lateinit var freelanceHoursApiService: FreelanceHoursApiService
-    var projects = ArrayList<Project>()
+    private var projects = ArrayList<Project>()
 
     /**
-     * Initialize newInstance for passing paameters
+     * Initialize newInstance for passing paramters
      */
     companion object {
         fun newInstance(): ProjectFragment {

@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.coen.freelancehours.R
 import com.coen.freelancehours.api.FreelanceHoursApi
 import com.coen.freelancehours.api.FreelanceHoursApiService
-import com.coen.freelancehours.api.response.ProjectSingleResponse
+import com.coen.freelancehours.api.response.project.ProjectSingleResponse
 import com.coen.freelancehours.model.Project
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -66,7 +66,7 @@ class DashboardFragment : Fragment() {
                         sbMsg(project.toString())
                     }
                     override fun onError(e: Throwable) { sbMsg("error: " + e.message) }
-                    override fun onSubscribe(d: Disposable) { sbMsg("OnSubscribe.") }
+                    override fun onSubscribe(d: Disposable) { }
                 })
     }
 
