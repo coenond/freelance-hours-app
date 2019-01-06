@@ -1,5 +1,7 @@
 package com.coen.freelancehours.api
 
+import com.coen.freelancehours.api.response.tax.TaxAllResponse
+import com.coen.freelancehours.api.response.tax.TaxSingleResponse
 import com.coen.freelancehours.api.response.hour.HourAllResponse
 import com.coen.freelancehours.api.response.hour.HourSingleResponse
 import com.coen.freelancehours.api.response.project.ProjectAllResponse
@@ -27,4 +29,13 @@ interface FreelanceHoursApiService {
 
     @GET("activities/get/{id}")
     fun getHour(@Path("id") id: String): Single<HourSingleResponse>
+
+    /**
+     * Tax Endpoints
+     */
+    @GET("taxes/all")
+    fun getAllTaxes(): Single<TaxAllResponse>
+
+    @GET("taxes/get/{id}")
+    fun getTax(@Path("id") id: String): Single<TaxSingleResponse>
 }
