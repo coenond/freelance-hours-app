@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 data class Project(
         @SerializedName("id") var id: Int,
         @SerializedName("name") var name: String,
-        @SerializedName("hour_rate") var hourRate: String,
+        @SerializedName("hour_rate") var hourRate: Double,
         @SerializedName("user_id") var user_id: Int
 ) : Parcelable

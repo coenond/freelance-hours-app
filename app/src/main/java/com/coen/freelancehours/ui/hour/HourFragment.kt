@@ -33,6 +33,14 @@ class HourFragment : BaseFragment<FragmentHourBinding, HourViewModel>() {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        fab_add_hour.setOnClickListener {
+            sbMsg("add project")
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

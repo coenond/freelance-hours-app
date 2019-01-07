@@ -7,8 +7,7 @@ import com.coen.freelancehours.api.response.hour.HourSingleResponse
 import com.coen.freelancehours.api.response.project.ProjectAllResponse
 import com.coen.freelancehours.api.response.project.ProjectSingleResponse
 import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface FreelanceHoursApiService {
 
@@ -19,7 +18,14 @@ interface FreelanceHoursApiService {
     fun getAllProject(): Single<ProjectAllResponse>
 
     @GET("projects/get/{id}")
-    fun getProject(@Path("id") id: String): Single<ProjectSingleResponse>
+    fun getProject(@Path("id") id: Int): Single<ProjectSingleResponse>
+
+    @POST("projects/store")
+    @FormUrlEncoded
+    fun storeProject(@Field("user_id") user_id: Int,
+                     @Field("name") name: String,
+                     @Field("hour_rate") hour_rate: Double)
+            : Single<ProjectSingleResponse>
 
     /**
      * Hour Endpoints

@@ -19,7 +19,7 @@ class ProjectAdapter(private var projects : ArrayList<Project>, private val cont
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvProjectName.text = projects[position].name
-        holder.tvHourRate.text = projects[position].hourRate
+        holder.tvHourRate.text = projects[position].hourRate.toString()
     }
 
     fun update(items : ArrayList<Project>) {

@@ -57,7 +57,7 @@ class DashboardFragment : Fragment() {
 
     private fun getProject() {
         Log.i("TAGZ", "GET_PROJECT")
-        freelanceHoursApiService.getProject("2")
+        freelanceHoursApiService.getProject(2)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : SingleObserver<ProjectSingleResponse> {

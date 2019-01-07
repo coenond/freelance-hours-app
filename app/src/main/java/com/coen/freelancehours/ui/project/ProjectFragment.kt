@@ -1,7 +1,9 @@
 package com.coen.freelancehours.ui.project
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
@@ -10,6 +12,7 @@ import com.coen.freelancehours.R
 import com.coen.freelancehours.base.BaseFragment
 import com.coen.freelancehours.model.Project
 import com.coen.freelancehours.databinding.FragmentProjectBinding
+import com.coen.freelancehours.ui.project.add.ProjectAddFragment
 import kotlinx.android.synthetic.main.fragment_project.*
 
 class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>() {
@@ -29,6 +32,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
             val fragmentHome = ProjectFragment()
             val args = Bundle()
             fragmentHome.arguments = args
+
             return fragmentHome
         }
 
@@ -47,7 +51,9 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
             projectAdapter.update(it as ArrayList<Project>)
         })
 
+        fab_add_project.setOnClickListener {
+            val fragment = ProjectAddFragment.newInstance()
+            addFragment(fragment)
+        }
     }
-
-    fun sbMsg(msg: String) = Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
 }

@@ -13,8 +13,12 @@ class ProjectRepository {
         return freelanceHoursApiService.getAllProject()
     }
 
-    fun getProject(id: String): Single<ProjectSingleResponse> {
+    fun getProject(id: Int): Single<ProjectSingleResponse> {
         return freelanceHoursApiService.getProject(id)
+    }
+
+    fun storeProject(user_id: Int, name: String, hour_rate: Double): Single<ProjectSingleResponse> {
+        return freelanceHoursApiService.storeProject(user_id, name, hour_rate)
     }
 
 }
