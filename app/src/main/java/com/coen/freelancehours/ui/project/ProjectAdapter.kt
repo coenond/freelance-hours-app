@@ -9,17 +9,27 @@ import com.coen.freelancehours.R
 import com.coen.freelancehours.model.Project
 import kotlinx.android.synthetic.main.item_project.view.*
 
-class ProjectAdapter(private var projects : ArrayList<Project>, private val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class ProjectAdapter(private val onClickCallback: (Project?) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 
-    override fun getItemCount(): Int { return projects.size }
+    private var projects: ArrayList<Project>? = null
+    private lateinit var context: Context
+
+    override fun getItemCount(): Int {return projects?.size ?: 0 }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        this.context = parent.context
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_project, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvProjectName.text = projects[position].name
-        holder.tvHourRate.text = projects[position].hourRate.toString()
+        holder.apply {
+            tvProjectName.text = projects!![position].name
+            tvHourRate.text = projects!![position].hourRate.toString()
+
+            cvProject.setOnClickListener{
+                onClickCallback(projects?.get(position))
+            }
+        }
     }
 
     fun update(items : ArrayList<Project>) {
@@ -31,4 +41,5 @@ class ProjectAdapter(private var projects : ArrayList<Project>, private val cont
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val tvProjectName = view.tv_project_name!!
     val tvHourRate = view.tv_hour_rate!!
+    val cvProject = view.cv_project!!
 }

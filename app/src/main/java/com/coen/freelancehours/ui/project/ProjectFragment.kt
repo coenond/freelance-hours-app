@@ -21,7 +21,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
     override fun initViewModelBinding() { binding.viewModel = viewModel }
     override fun getLayoutId(): Int = R.layout.fragment_project
 
-    lateinit var projectAdapter: ProjectAdapter
+    private val projectAdapter = ProjectAdapter { if (it != null) onProjectClick(it) }
     private var projects = ArrayList<Project>()
 
     /**
@@ -42,7 +42,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
         super.onViewCreated(view, savedInstanceState)
 
         // Init RecyclerView
-        projectAdapter = ProjectAdapter(projects, this.context!!)
+        projectAdapter.update(projects)
 
         rv_project_list.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         rv_project_list.adapter = projectAdapter
@@ -55,5 +55,9 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
             val fragment = ProjectAddFragment.newInstance()
             addFragment(fragment)
         }
+    }
+
+    private fun onProjectClick(project: Project) {
+        sbMsg("Project ${project.name} clicked")
     }
 }
