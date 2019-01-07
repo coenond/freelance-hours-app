@@ -23,9 +23,7 @@ class ProjectRepository {
     }
 
     fun deleteProject(id: Int): Single<ProjectSingleResponse> {
-        val delete = freelanceHoursApiService.deleteProject(id)
-        Log.i("TAGZ", delete.toString())
-        return delete
+        return freelanceHoursApiService.deleteProject(id)
     }
 
 

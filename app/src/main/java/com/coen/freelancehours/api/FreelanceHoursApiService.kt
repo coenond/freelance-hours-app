@@ -40,6 +40,20 @@ interface FreelanceHoursApiService {
     @GET("activities/get/{id}")
     fun getHour(@Path("id") id: String): Single<HourSingleResponse>
 
+    @POST("activities/store")
+    @FormUrlEncoded
+    fun storeHour(@Field("tax_id") tax_id: Int,
+                  @Field("project_id") project_id: Int,
+                  @Field("name") name: String,
+                  @Field("description") description: String,
+                  @Field("started_at") started_at: String,
+                  @Field("finished_at") finished_at: String)
+            : Single<HourSingleResponse>
+
+
+    @GET("projects/{id}/destroy")
+    fun deleteHour(@Path("id") id: Int): Single<HourSingleResponse>
+
     /**
      * Tax Endpoints
      */

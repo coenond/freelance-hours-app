@@ -10,4 +10,9 @@ data class Project(
         @SerializedName("name") var name: String,
         @SerializedName("hour_rate") var hourRate: Double,
         @SerializedName("user_id") var user_id: Int
-) : Parcelable
+) : Parcelable {
+
+    override fun toString(): String {
+        return "$name - $hourRate per hour"
+    }
+}

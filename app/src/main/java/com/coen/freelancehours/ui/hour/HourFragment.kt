@@ -9,6 +9,7 @@ import com.coen.freelancehours.R
 import com.coen.freelancehours.base.BaseFragment
 import com.coen.freelancehours.model.Hour
 import com.coen.freelancehours.databinding.FragmentHourBinding
+import com.coen.freelancehours.ui.hour.add.HourAddFragment
 import kotlinx.android.synthetic.main.fragment_hour.*
 
 class HourFragment : BaseFragment<FragmentHourBinding, HourViewModel>() {
@@ -33,14 +34,6 @@ class HourFragment : BaseFragment<FragmentHourBinding, HourViewModel>() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        fab_add_hour.setOnClickListener {
-            sbMsg("add project")
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,5 +46,10 @@ class HourFragment : BaseFragment<FragmentHourBinding, HourViewModel>() {
         viewModel.hourList.observe(this, Observer {
             hourAdapter.update(it as ArrayList<Hour>)
         })
+
+        fab_add_hour.setOnClickListener {
+            val fragment = HourAddFragment.newInstance()
+            addFragment(fragment)
+        }
     }
 }
