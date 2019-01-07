@@ -36,6 +36,10 @@ class ProjectAdapter(private val onClickCallback: (Project?) -> Unit) : Recycler
         this.projects = items
         notifyDataSetChanged()
     }
+
+    fun getItem(position: Int): Project? {
+        return projects?.get(position)
+    }
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {

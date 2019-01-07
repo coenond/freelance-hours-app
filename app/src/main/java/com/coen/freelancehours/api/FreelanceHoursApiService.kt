@@ -27,6 +27,10 @@ interface FreelanceHoursApiService {
                      @Field("hour_rate") hour_rate: Double)
             : Single<ProjectSingleResponse>
 
+
+    @GET("projects/{id}/destroy")
+    fun deleteProject(@Path("id") id: Int): Single<ProjectSingleResponse>
+
     /**
      * Hour Endpoints
      */
