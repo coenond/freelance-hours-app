@@ -86,6 +86,4 @@ class ProjectRepository(context: Context) {
                 override fun onSubscribe(d: Disposable) {  }
             })
     }
-
-
 }

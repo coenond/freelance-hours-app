@@ -26,6 +26,10 @@ class TaxAdapter(private var taxes : ArrayList<Tax>, private val context: Contex
         this.taxes = items
         notifyDataSetChanged()
     }
+
+    fun getItem(position: Int): Tax? {
+        return taxes?.get(position)
+    }
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {

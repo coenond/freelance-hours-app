@@ -19,4 +19,5 @@
     <string name="project">Project</string>
     <string name="total_logs">Total logs</string>
     <string name="total_revenue">Total revenue</string>
+    <string name="tax_rate">Tax rate</string>
 </resources>

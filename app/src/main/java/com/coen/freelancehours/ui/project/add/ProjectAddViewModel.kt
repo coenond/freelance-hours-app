@@ -2,14 +2,8 @@ package com.coen.freelancehours.ui.project.add
 
 import android.app.Application
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
-import com.coen.freelancehours.api.response.project.ProjectSingleResponse
 import com.coen.freelancehours.base.BaseViewModel
 import com.coen.freelancehours.repository.ProjectRepository
-import io.reactivex.SingleObserver
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class ProjectAddViewModel(application: Application) : BaseViewModel(application) {
 

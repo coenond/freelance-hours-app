@@ -17,9 +17,8 @@ class TaxViewModel(application: Application) : BaseViewModel(application) {
     private var repo: TaxRepository = TaxRepository(application.applicationContext)
 
     var taxList = repo.getAllTaxes()
+    var status = MutableLiveData<String>()
 
-//    fun setData(taxList: ArrayList<Tax>) {
-//        this.taxList.value = taxList
-//    }
+    fun deleteTax(tax: Tax) = repo.deleteTax(tax)
 
 }

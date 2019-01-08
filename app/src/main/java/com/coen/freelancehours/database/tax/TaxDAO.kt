@@ -8,6 +8,9 @@ import com.coen.freelancehours.model.Tax
 @Dao
 interface TaxDAO {
 
+    @Query("SELECT * FROM Taxes WHERE id = :id")
+    fun get(id: Int): Tax
+
     @Insert
     fun insert(tax: Tax)
 

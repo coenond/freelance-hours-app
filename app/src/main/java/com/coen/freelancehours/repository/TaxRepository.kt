@@ -3,7 +3,6 @@ package com.coen.freelancehours.repository
 import android.arch.lifecycle.LiveData
 import android.content.Context
 import com.coen.freelancehours.api.FreelanceHoursApi
-import com.coen.freelancehours.api.response.hour.HourAllResponse
 import com.coen.freelancehours.api.response.tax.TaxAllResponse
 import com.coen.freelancehours.api.response.tax.TaxSingleResponse
 import com.coen.freelancehours.database.tax.TaxDAO
@@ -18,7 +17,7 @@ import org.jetbrains.anko.doAsync
 
 class TaxRepository(context: Context) {
 
-    var freelanceHoursApiService = FreelanceHoursApi.start()
+    var apiService = FreelanceHoursApi.start()
     var taxDao: TaxDAO
 
     init {
@@ -29,7 +28,7 @@ class TaxRepository(context: Context) {
     fun getAllTaxes(): LiveData<List<Tax>>? {
         val taxList = taxDao.getAll()
 
-        freelanceHoursApiService.getAllTaxes()
+        apiService.getAllTaxes()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : SingleObserver<TaxAllResponse> {
@@ -45,8 +44,49 @@ class TaxRepository(context: Context) {
         return taxList
     }
 
-    fun getTax(id: String): Single<TaxSingleResponse> {
-        return freelanceHoursApiService.getTax(id)
+    fun getTax(id: Int): Tax {
+        val tax = taxDao.get(id)
+        apiService.getTax(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : SingleObserver<TaxSingleResponse> {
+                    override fun onSuccess(response: TaxSingleResponse) {
+                        doAsync { taxDao.update(response.tax) }
+                    }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
+                    override fun onSubscribe(d: Disposable) { }
+                })
+
+        return tax
     }
+
+    fun storeTax(name: String, rate: Double) {
+        apiService.storeTax(name, rate)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : SingleObserver<TaxSingleResponse> {
+                    override fun onSuccess(response: TaxSingleResponse) {
+                        doAsync { taxDao.insert(response.tax) }
+                    }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
+                    override fun onSubscribe(d: Disposable) { }
+                })
+    }
+
+    fun deleteTax(tax: Tax) {
+        doAsync { taxDao.delete(tax) }
+        apiService.deleteTax(tax.id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : SingleObserver<TaxSingleResponse> {
+                    override fun onSuccess(response: TaxSingleResponse) {
+                        /* TODO: On Success Response */
+                    }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
+                    override fun onSubscribe(d: Disposable) {  }
+                })
+    }
+
+
 
 }

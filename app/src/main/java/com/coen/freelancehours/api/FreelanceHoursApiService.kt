@@ -51,7 +51,7 @@ interface FreelanceHoursApiService {
             : Single<HourSingleResponse>
 
 
-    @GET("projects/{id}/destroy")
+    @GET("activities/{id}/destroy")
     fun deleteHour(@Path("id") id: Int): Single<HourSingleResponse>
 
     /**
@@ -61,5 +61,12 @@ interface FreelanceHoursApiService {
     fun getAllTaxes(): Single<TaxAllResponse>
 
     @GET("taxes/get/{id}")
-    fun getTax(@Path("id") id: String): Single<TaxSingleResponse>
+    fun getTax(@Path("id") id: Int): Single<TaxSingleResponse>
+
+    @POST("taxes/store")
+    @FormUrlEncoded
+    fun storeTax(@Field("name") tax_id: String, @Field("rate") project_id: Double) : Single<TaxSingleResponse>
+
+    @GET("taxes/{id}/destroy")
+    fun deleteTax(@Path("id") id: Int): Single<TaxSingleResponse>
 }
