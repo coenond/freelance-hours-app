@@ -14,33 +14,12 @@ import io.reactivex.schedulers.Schedulers
 
 class TaxViewModel(application: Application) : BaseViewModel(application) {
 
-    private var repo: TaxRepository = TaxRepository()
+    private var repo: TaxRepository = TaxRepository(application.applicationContext)
 
-    var taxList = MutableLiveData<ArrayList<Tax>>()
+    var taxList = repo.getAllTaxes()
 
-    init {
-        getAllTaxes()
-    }
-
-    fun setData(taxList: ArrayList<Tax>) {
-        this.taxList.value = taxList
-    }
-
-    private fun getAllTaxes() {
-        repo.getAllTaxes()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : SingleObserver<TaxAllResponse> {
-                    override fun onSuccess(response: TaxAllResponse) {
-                        response.taxes?.let {
-                            var list = ArrayList<Tax>()
-                            list.addAll(it)
-                            taxList.postValue(list)
-                        }
-                    }
-                    override fun onError(e: Throwable) {  }
-                    override fun onSubscribe(d: Disposable) { Log.i("TAGZ", "OnSubscribe!") }
-                })
-    }
+//    fun setData(taxList: ArrayList<Tax>) {
+//        this.taxList.value = taxList
+//    }
 
 }

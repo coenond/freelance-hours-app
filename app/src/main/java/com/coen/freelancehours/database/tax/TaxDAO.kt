@@ -1,5 +1,6 @@
 package com.coen.freelancehours.database.tax
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.persistence.room.*
 import com.coen.freelancehours.model.Tax
@@ -9,6 +10,9 @@ interface TaxDAO {
 
     @Insert
     fun insert(tax: Tax)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(taxes: List<Tax>)
 
     @Delete
     fun delete(tax: Tax)
@@ -20,5 +24,5 @@ interface TaxDAO {
     fun deleteAll()
 
     @Query("SELECT * from Taxes")
-    fun getAll(): List<Tax>
+    fun getAll(): LiveData<List<Tax>>?
 }

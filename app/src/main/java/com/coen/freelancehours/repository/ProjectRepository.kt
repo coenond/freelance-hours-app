@@ -36,14 +36,11 @@ class ProjectRepository(context: Context) {
                 .subscribe(object : SingleObserver<ProjectAllResponse> {
                     override fun onSuccess(response: ProjectAllResponse) {
                         response.projects?.let {
-                            Log.i("TAGZ", "Update Room database!")
-                            doAsync {
-                                projectDAO.insertAll(it)
-                            }
+                            doAsync { projectDAO.insertAll(it) }
                         }
                     }
                     override fun onError(e: Throwable) {  }
-                    override fun onSubscribe(d: Disposable) { Log.i("TAGZ", "OnSubscribe!") }
+                    override fun onSubscribe(d: Disposable) {  }
                 })
 
         return projectList

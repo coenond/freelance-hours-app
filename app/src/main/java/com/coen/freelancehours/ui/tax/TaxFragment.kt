@@ -40,7 +40,7 @@ class TaxFragment : BaseFragment<FragmentTaxBinding, TaxViewModel>() {
         rv_tax_list.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         rv_tax_list.adapter = taxAdapter
 
-        viewModel.taxList.observe(this, Observer {
+        viewModel.taxList?.observe(this, Observer {
             taxAdapter.update(it as ArrayList<Tax>)
         })
     }

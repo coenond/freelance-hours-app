@@ -43,7 +43,7 @@ class HourFragment : BaseFragment<FragmentHourBinding, HourViewModel>() {
         rv_hour_list.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         rv_hour_list.adapter = hourAdapter
 
-        viewModel.hourList.observe(this, Observer {
+        viewModel.hourList?.observe(this, Observer {
             hourAdapter.update(it as ArrayList<Hour>)
         })
 

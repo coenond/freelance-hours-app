@@ -14,33 +14,12 @@ import io.reactivex.schedulers.Schedulers
 
 class HourViewModel(application: Application) : BaseViewModel(application) {
 
-    private var repo: HourRepository = HourRepository()
+    private var repo: HourRepository = HourRepository(application.applicationContext)
 
-    var hourList = MutableLiveData<ArrayList<Hour>>()
+    var hourList = repo.getAllHours()
 
-    init {
-        getAllHours()
-    }
-
-    fun setData(hourList: ArrayList<Hour>) {
-        this.hourList.value = hourList
-    }
-
-    private fun getAllHours() {
-        repo.getAllHours()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : SingleObserver<HourAllResponse> {
-                    override fun onSuccess(response: HourAllResponse) {
-                        response.hours?.let {
-                            var list = ArrayList<Hour>()
-                            list.addAll(it)
-                            hourList.postValue(list)
-                        }
-                    }
-                    override fun onError(e: Throwable) {  }
-                    override fun onSubscribe(d: Disposable) { Log.i("TAGZ", "OnSubscribe!") }
-                })
-    }
+//    fun setData(hourList: ArrayList<Hour>) {
+//        this.hourList.value = hourList
+//    }
 
 }

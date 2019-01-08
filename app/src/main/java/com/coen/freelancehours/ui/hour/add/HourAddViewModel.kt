@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers
 
 class HourAddViewModel(application: Application) : BaseViewModel(application) {
 
-    private var repo: HourRepository = HourRepository()
+    private var repo: HourRepository = HourRepository(application.applicationContext)
 
     var tax = MutableLiveData<Tax>()
     var project = MutableLiveData<Project>()
