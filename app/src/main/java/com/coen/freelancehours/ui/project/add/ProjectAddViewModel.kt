@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 
 class ProjectAddViewModel(application: Application) : BaseViewModel(application) {
 
-    private var repo: ProjectRepository = ProjectRepository()
+    private var repo: ProjectRepository = ProjectRepository(application.applicationContext)
 
     var user_id = MutableLiveData<Int>()
     var name = MutableLiveData<String>()

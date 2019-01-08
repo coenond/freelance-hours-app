@@ -52,7 +52,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
         rv_project_list.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         rv_project_list.adapter = projectAdapter
 
-        viewModel.projectList.observe(this, Observer {
+        viewModel.projectList!!.observe(this, Observer {
             projectAdapter.update(it as ArrayList<Project>)
         })
 

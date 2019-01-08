@@ -15,21 +15,16 @@ import io.reactivex.schedulers.Schedulers
 
 class ProjectViewModel(application: Application) : BaseViewModel(application) {
 
-    private var repo: ProjectRepository = ProjectRepository()
+    private var repo: ProjectRepository = ProjectRepository(application.applicationContext)
 
-    var projectList = MutableLiveData<ArrayList<Project>>()
+    var projectList = repo.getAllProjects()
     var status = MutableLiveData<String>()
 
-    init {
-        getAllProjects()
-    }
-
-    fun setData(projectList: ArrayList<Project>) {
-        this.projectList.value = projectList
-    }
+//    fun setData(projectList: ArrayList<Project>) {
+//        this.projectList!!.value = projectList
+//    }
 
     fun deleteProject(project: Project) {
-        Log.i("TAGZ", "delete project ${project.id}")
         repo.deleteProject(project.id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -38,24 +33,6 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
                         status.value = response.status
                     }
                     override fun onError(e: Throwable) { Log.i("TAGZ", e.message) }
-                    override fun onSubscribe(d: Disposable) { Log.i("TAGZ", "OnSubscribe!") }
-                })
-    }
-
-    private fun getAllProjects() {
-        repo.getAllProjects()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : SingleObserver<ProjectAllResponse> {
-                    override fun onSuccess(response: ProjectAllResponse) {
-                        response.projects?.let {
-                            var list = ArrayList<Project>()
-                            list.addAll(it)
-                            projectList.postValue(list)
-                            Log.i("TAGZ", it.toString())
-                        }
-                    }
-                    override fun onError(e: Throwable) {  }
                     override fun onSubscribe(d: Disposable) { Log.i("TAGZ", "OnSubscribe!") }
                 })
     }

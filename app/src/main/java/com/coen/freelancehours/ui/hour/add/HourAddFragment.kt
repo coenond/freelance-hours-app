@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_hour_add.*
 import java.util.*
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.widget.TimePicker
 import java.text.SimpleDateFormat
 
 

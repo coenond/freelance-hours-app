@@ -1,12 +1,15 @@
 package com.coen.freelancehours.model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+@Entity(tableName = "hours")
 data class Hour(
-        @SerializedName("id") var id: Int,
+        @SerializedName("id") @PrimaryKey var id: Int,
         @SerializedName("name") var name: String,
         @SerializedName("description") var description: String,
         @SerializedName("started_at") var started_at: String,
