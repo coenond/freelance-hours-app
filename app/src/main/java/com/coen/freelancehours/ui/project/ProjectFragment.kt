@@ -52,7 +52,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
         rv_project_list.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         rv_project_list.adapter = projectAdapter
 
-        viewModel.projectList!!.observe(this, Observer {
+        viewModel.projectList?.observe(this, Observer {
             projectAdapter.update(it as ArrayList<Project>)
         })
 
@@ -62,7 +62,6 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
                 val project = projectAdapter.getItem(viewHolder.adapterPosition)!!
                 viewModel.deleteProject(project)
                 sbMsg("Project ${project.name} deleted")
-                refreshFragment()
             }
         }
         val itemTouchHelper = ItemTouchHelper(onSwipe)

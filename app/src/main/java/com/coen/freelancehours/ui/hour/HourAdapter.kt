@@ -26,6 +26,12 @@ class HourAdapter(private var hours : ArrayList<Hour>, private val context: Cont
         this.hours = items
         notifyDataSetChanged()
     }
+
+    fun getItem(position: Int): Hour? {
+        return hours?.get(position)
+    }
+
+
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {

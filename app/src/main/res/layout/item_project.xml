@@ -5,36 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="18dp"
-    android:layout_marginTop="12dp"
-    android:padding="10dp">
+    android:layout_marginTop="18dp">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="146dp"
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/tv_project_name"
             android:gravity="center"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:fontFamily="sans-serif"
-            android:text="ProjectName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textFontWeight="bold"
+            android:paddingBottom="14dp"
+            android:textColor="@color/colorText"
+            android:textSize="28dp"
+            android:text="Peakfijn" />
 
         <TextView
             android:id="@+id/tv_hour_rate"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="15.00"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorText"
+            android:textFontWeight="bold"
+            android:textSize="22sp"
+            android:text="$25 per hour"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_logs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextLight"
+            android:textFontWeight="bold"
+            android:textSize="18sp"
+            android:text="25 total logs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextLight"
+            android:textFontWeight="bold"
+            android:textSize="18sp"
+            android:text="12 hours"
+            app:layout_constraintTop_toTopOf="@+id/tv_logs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_revenue"/>
+
+        <TextView
+            android:id="@+id/tv_revenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGreen"
+            android:textFontWeight="bold"
+            android:textSize="18sp"
+            android:text="$1234 revenue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

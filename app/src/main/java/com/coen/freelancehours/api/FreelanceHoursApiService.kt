@@ -38,7 +38,7 @@ interface FreelanceHoursApiService {
     fun getAllHours(): Single<HourAllResponse>
 
     @GET("activities/get/{id}")
-    fun getHour(@Path("id") id: String): Single<HourSingleResponse>
+    fun getHour(@Path("id") id: Int): Single<HourSingleResponse>
 
     @POST("activities/store")
     @FormUrlEncoded

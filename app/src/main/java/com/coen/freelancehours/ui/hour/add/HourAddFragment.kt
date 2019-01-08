@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_hour_add.*
 import java.util.*
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import com.coen.freelancehours.ui.project.ProjectViewModel
 import java.text.SimpleDateFormat
 
 
@@ -23,7 +24,6 @@ class HourAddFragment : BaseFragment<FragmentHourAddBinding, HourAddViewModel>()
     private var clock = Calendar.getInstance()
     private val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.GERMANY)
     private val stf = SimpleDateFormat("HH:mm", Locale.GERMANY)
-
     override fun getVMClass(): Class<HourAddViewModel> = HourAddViewModel::class.java
     override fun initViewModelBinding() { binding.viewModel = viewModel }
     override fun getLayoutId(): Int = R.layout.fragment_hour_add
@@ -79,7 +79,7 @@ class HourAddFragment : BaseFragment<FragmentHourAddBinding, HourAddViewModel>()
 
         initObservers()
 
-        val projects = arrayOf(Project(1, "Some Project", 25.0, 1), Project(2, "Other Project", 25.0, 1))
+        val projects = arrayOf(Project(1, "Some Project", 25.0, 1, 1, 1, 1), Project(2, "Other Project", 25.0, 1, 1, 1, 1))
         val taxes = arrayOf(Tax(1, "BTW Hoog", 21.0), Tax(2, "BTW Laag", 9.0))
 
         val spinProjectsAdapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, projects)

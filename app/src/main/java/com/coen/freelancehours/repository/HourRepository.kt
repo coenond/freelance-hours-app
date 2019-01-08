@@ -2,11 +2,9 @@ package com.coen.freelancehours.repository
 
 import android.arch.lifecycle.LiveData
 import android.content.Context
-import android.util.Log
 import com.coen.freelancehours.api.FreelanceHoursApi
 import com.coen.freelancehours.api.response.hour.HourSingleResponse
 import com.coen.freelancehours.api.response.hour.HourAllResponse
-import com.coen.freelancehours.api.response.project.ProjectAllResponse
 import com.coen.freelancehours.database.hour.HourDAO
 import com.coen.freelancehours.database.hour.HourDatabase
 import com.coen.freelancehours.model.Hour
@@ -21,7 +19,7 @@ import org.jetbrains.anko.doAsync
 
 class HourRepository(context: Context) {
 
-    private var freelanceHoursApiService = FreelanceHoursApi.start()
+    private var apiService = FreelanceHoursApi.start()
     var hourDao: HourDAO
 
     init {
@@ -32,7 +30,7 @@ class HourRepository(context: Context) {
     fun getAllHours(): LiveData<List<Hour>>? {
         val hourList = hourDao.getAll()
 
-        freelanceHoursApiService.getAllHours()
+        apiService.getAllHours()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : SingleObserver<HourAllResponse> {
@@ -41,32 +39,59 @@ class HourRepository(context: Context) {
                             doAsync { hourDao.insertAll(it) }
                         }
                     }
-                    override fun onError(e: Throwable) {  }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
                     override fun onSubscribe(d: Disposable) { }
                 })
 
         return hourList
     }
 
-    fun getHour(id: String): Single<HourSingleResponse> {
-        return freelanceHoursApiService.getHour(id)
+    fun getHour(id: Int): Hour {
+        val hour = hourDao.get(id)
+        apiService.getHour(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : SingleObserver<HourSingleResponse> {
+                    override fun onSuccess(response: HourSingleResponse) {
+                        doAsync { hourDao.update(response.hour) }
+                    }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
+                    override fun onSubscribe(d: Disposable) { }
+                })
+
+        return hour
     }
 
-    fun storeHour(
-            tax: Tax,
-            project: Project,
-            name: String,
-            description: String,
-            started_at: String,
-            finished_at: String
-            ): Single<HourSingleResponse> {
-        return freelanceHoursApiService.storeHour(
-                tax.id, project.id, name, description,
-                started_at, finished_at)
+    fun storeHour(  tax: Tax,
+                    project: Project,
+                    name: String,
+                    description: String,
+                    started_at: String,
+                    finished_at: String ) {
+        apiService.storeHour(tax.id, project.id, name, description, started_at, finished_at)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : SingleObserver<HourSingleResponse> {
+                    override fun onSuccess(response: HourSingleResponse) {
+                        doAsync { hourDao.insert(response.hour) }
+                    }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
+                    override fun onSubscribe(d: Disposable) { }
+                })
     }
 
-    fun deleteHour(id: Int): Single<HourSingleResponse> {
-        return freelanceHoursApiService.deleteHour(id)
+    fun deleteHour(hour: Hour) {
+        doAsync {  hourDao.delete(hour) }
+        apiService.deleteHour(hour.id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : SingleObserver<HourSingleResponse> {
+                    override fun onSuccess(response: HourSingleResponse) {
+                        /* TODO: On Success Response */
+                    }
+                    override fun onError(e: Throwable) {  /* TODO: Handle error*/ }
+                    override fun onSubscribe(d: Disposable) {  }
+                })
     }
 
 }

@@ -18,8 +18,6 @@ class HourViewModel(application: Application) : BaseViewModel(application) {
 
     var hourList = repo.getAllHours()
 
-//    fun setData(hourList: ArrayList<Hour>) {
-//        this.hourList.value = hourList
-//    }
+    fun deleteHour(hour: Hour) = repo.deleteHour(hour)
 
 }

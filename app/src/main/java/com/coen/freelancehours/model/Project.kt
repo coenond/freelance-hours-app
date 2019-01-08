@@ -12,7 +12,10 @@ data class Project(
         @SerializedName("id") @PrimaryKey var id: Int,
         @SerializedName("name") var name: String,
         @SerializedName("hour_rate") var hourRate: Double,
-        @SerializedName("user_id") var user_id: Int
+        @SerializedName("user_id") var user_id: Int,
+        @SerializedName("logs") var logs: Int,
+        @SerializedName("revenue") var revenue: Int,
+        @SerializedName("hours") var hours: Int
 ) : Parcelable {
 
     override fun toString(): String {

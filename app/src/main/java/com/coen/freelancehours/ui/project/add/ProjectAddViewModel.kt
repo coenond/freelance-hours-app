@@ -29,7 +29,7 @@ class ProjectAddViewModel(application: Application) : BaseViewModel(application)
 
         repo.storeProject(userId, name, hourRate)
 
-        /* ToDO: make this dynamic with the response */
+        /* TODO: make this dynamic with the response */
         status.value = "success"
     }
 }

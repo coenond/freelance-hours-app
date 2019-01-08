@@ -1,5 +1,6 @@
 package com.coen.freelancehours.ui.project
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -21,10 +22,14 @@ class ProjectAdapter(private val onClickCallback: (Project?) -> Unit) : Recycler
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_project, parent, false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.apply {
             tvProjectName.text = projects!![position].name
-            tvHourRate.text = projects!![position].hourRate.toString()
+            tvHourRate.text = "$" + projects!![position].hourRate.toString() + " per hour"
+            tvLogs.text = projects!![position].logs.toString() + " total logs"
+            tvRevenue.text = "$" + projects!![position].revenue.toString() + " total revenue"
+            tvHours.text = projects!![position].hours.toString() + " hours logged"
 
             cvProject.setOnClickListener{
                 onClickCallback(projects?.get(position))
@@ -46,4 +51,7 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val tvProjectName = view.tv_project_name!!
     val tvHourRate = view.tv_hour_rate!!
     val cvProject = view.cv_project!!
+    val tvLogs = view.tv_logs!!
+    val tvRevenue = view.tv_revenue!!
+    val tvHours = view.tv_hours!!
 }

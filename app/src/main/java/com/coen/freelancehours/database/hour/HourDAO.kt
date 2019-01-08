@@ -8,6 +8,9 @@ import com.coen.freelancehours.model.Hour
 @Dao
 interface HourDAO {
 
+    @Query("SELECT * FROM Hours WHERE id = :id")
+    fun get(id: Int): Hour
+
     @Insert
     fun insert(hour: Hour)
 

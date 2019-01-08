@@ -20,22 +20,7 @@ class ProjectViewModel(application: Application) : BaseViewModel(application) {
     var projectList = repo.getAllProjects()
     var status = MutableLiveData<String>()
 
-//    fun setData(projectList: ArrayList<Project>) {
-//        this.projectList!!.value = projectList
-//    }
-
-    fun deleteProject(project: Project) {
-        repo.deleteProject(project.id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : SingleObserver<ProjectSingleResponse> {
-                    override fun onSuccess(response: ProjectSingleResponse) {
-                        status.value = response.status
-                    }
-                    override fun onError(e: Throwable) { Log.i("TAGZ", e.message) }
-                    override fun onSubscribe(d: Disposable) { Log.i("TAGZ", "OnSubscribe!") }
-                })
-    }
+    fun deleteProject(project: Project) = repo.deleteProject(project)
 
 }
 

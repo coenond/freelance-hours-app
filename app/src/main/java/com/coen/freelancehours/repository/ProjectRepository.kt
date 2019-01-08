@@ -1,8 +1,6 @@
 package com.coen.freelancehours.repository
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.util.Log
 import com.coen.freelancehours.api.FreelanceHoursApi
@@ -11,7 +9,6 @@ import com.coen.freelancehours.api.response.project.ProjectSingleResponse
 import com.coen.freelancehours.database.project.ProjectDAO
 import com.coen.freelancehours.database.project.ProjectDatabase
 import com.coen.freelancehours.model.Project
-import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -20,7 +17,7 @@ import org.jetbrains.anko.doAsync
 
 class ProjectRepository(context: Context) {
 
-    var freelanceHoursApiService = FreelanceHoursApi.start()
+    private var apiService = FreelanceHoursApi.start()
     var projectDAO: ProjectDAO
 
     init {
@@ -31,7 +28,7 @@ class ProjectRepository(context: Context) {
     fun getAllProjects(): LiveData<List<Project>>? {
         val projectList = projectDAO.getAll()
 
-        freelanceHoursApiService.getAllProject()
+        apiService.getAllProject()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : SingleObserver<ProjectAllResponse> {
@@ -40,32 +37,54 @@ class ProjectRepository(context: Context) {
                             doAsync { projectDAO.insertAll(it) }
                         }
                     }
-                    override fun onError(e: Throwable) {  }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
                     override fun onSubscribe(d: Disposable) {  }
                 })
 
         return projectList
     }
 
-    fun getProject(id: Int): Single<ProjectSingleResponse> {
-        return freelanceHoursApiService.getProject(id)
+    fun getProject(id: Int): Project {
+        val project = projectDAO.get(id)
+        apiService.getProject(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : SingleObserver<ProjectSingleResponse> {
+                    override fun onSuccess(response: ProjectSingleResponse) {
+                        doAsync { projectDAO.update(response.project) }
+                    }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
+                    override fun onSubscribe(d: Disposable) { }
+                })
+
+        return project
     }
 
     fun storeProject(user_id: Int, name: String, hourRate: Double) {
-        freelanceHoursApiService.storeProject(user_id, name, hourRate)
+        apiService.storeProject(user_id, name, hourRate)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(object : SingleObserver<ProjectSingleResponse> {
                     override fun onSuccess(response: ProjectSingleResponse) {
                         doAsync { projectDAO.insert(response.project) }
                     }
-                    override fun onError(e: Throwable) {  }
+                    override fun onError(e: Throwable) { /* TODO: Handle error*/  }
                     override fun onSubscribe(d: Disposable) { }
                 })
     }
 
-    fun deleteProject(id: Int): Single<ProjectSingleResponse> {
-        return freelanceHoursApiService.deleteProject(id)
+    fun deleteProject(project: Project) {
+        doAsync { projectDAO.delete(project) }
+        apiService.deleteProject(project.id)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe(object : SingleObserver<ProjectSingleResponse> {
+                override fun onSuccess(response: ProjectSingleResponse) {
+                    /* TODO: On Success Response */
+                }
+                override fun onError(e: Throwable) { /* TODO: Handle error*/  }
+                override fun onSubscribe(d: Disposable) {  }
+            })
     }
 
 

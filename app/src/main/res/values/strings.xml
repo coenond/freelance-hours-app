@@ -9,4 +9,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="AddNewProjectTitle">Add new project</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="hour_rate">Hour rate</string>
+    <string name="date">Date</string>
+    <string name="started_at">Started at</string>
+    <string name="finished_at">Finished at</string>
+    <string name="tax">Tax</string>
+    <string name="project">Project</string>
+    <string name="total_logs">Total logs</string>
+    <string name="total_revenue">Total revenue</string>
 </resources>
