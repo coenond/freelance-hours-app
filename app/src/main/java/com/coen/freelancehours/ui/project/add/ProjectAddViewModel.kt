@@ -28,24 +28,9 @@ class ProjectAddViewModel(application: Application) : BaseViewModel(application)
         val hourRate = hour_rate.value!!
 
         repo.storeProject(userId, name, hourRate)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : SingleObserver<ProjectSingleResponse> {
-                    override fun onSuccess(response: ProjectSingleResponse) {
-                        status.value = response.status
-                        message.value = "Project $name added."
-                    }
-                    override fun onError(e: Throwable) { message.value = e.message }
-                    override fun onSubscribe(d: Disposable) { Log.i("TAGZ", "OnSubscribe!") }
-                })
-    }
 
-    fun getNameAttribute(): MutableLiveData<String> {
-        return name
-    }
-
-    fun getHourRateAttribute(): MutableLiveData<Double> {
-        return hour_rate
+        /* ToDO: make this dynamic with the response */
+        status.value = "success"
     }
 }
 

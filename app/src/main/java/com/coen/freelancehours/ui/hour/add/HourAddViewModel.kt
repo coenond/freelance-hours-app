@@ -47,12 +47,5 @@ class HourAddViewModel(application: Application) : BaseViewModel(application) {
                     override fun onSubscribe(d: Disposable) { Log.i("TAGZ", "OnSubscribe!") }
                 })
     }
-
-    fun getTaxAttribute(): MutableLiveData<Tax> { return tax }
-    fun getProjectAttribute(): MutableLiveData<Project> { return project }
-    fun getNameAttribute(): MutableLiveData<String> { return name }
-    fun getDescriptionAttribute(): MutableLiveData<String> { return description }
-    fun getStartedAtAttribute(): MutableLiveData<String> { return started_at }
-    fun getFinishedAtAttribute(): MutableLiveData<String> { return finished_at }
 }
 

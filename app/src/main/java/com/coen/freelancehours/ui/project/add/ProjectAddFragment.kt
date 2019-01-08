@@ -31,12 +31,9 @@ class ProjectAddFragment : BaseFragment<FragmentProjectAddBinding, ProjectAddVie
 
     private fun initObservers() {
         viewModel.status.observe(this, Observer {
-            sbMsg("Project ${viewModel.name.value} added.")
-
-            if (viewModel.status.value == "success") {
-                val fragment = ProjectFragment.newInstance()
-                addFragment(fragment)
-            }
+            sbMsg("Project ${viewModel.name.value} added. ${viewModel.status.value}")
+            val fragment = ProjectFragment.newInstance()
+            addFragment(fragment)
         })
     }
 

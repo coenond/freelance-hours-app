@@ -2,6 +2,7 @@ package com.coen.freelancehours.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import android.content.Context
 import android.util.Log
 import com.coen.freelancehours.api.FreelanceHoursApi
@@ -50,8 +51,17 @@ class ProjectRepository(context: Context) {
         return freelanceHoursApiService.getProject(id)
     }
 
-    fun storeProject(user_id: Int, name: String, hour_rate: Double): Single<ProjectSingleResponse> {
-        return freelanceHoursApiService.storeProject(user_id, name, hour_rate)
+    fun storeProject(user_id: Int, name: String, hourRate: Double) {
+        freelanceHoursApiService.storeProject(user_id, name, hourRate)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(object : SingleObserver<ProjectSingleResponse> {
+                    override fun onSuccess(response: ProjectSingleResponse) {
+                        doAsync { projectDAO.insert(response.project) }
+                    }
+                    override fun onError(e: Throwable) {  }
+                    override fun onSubscribe(d: Disposable) { }
+                })
     }
 
     fun deleteProject(id: Int): Single<ProjectSingleResponse> {
