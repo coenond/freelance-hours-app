@@ -4,36 +4,37 @@
     android:id="@+id/cv_tax"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="18dp"
-    android:layout_marginTop="12dp"
-    android:padding="10dp">
+    android:layout_margin="18dp">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="18dp">
+
+        <TextView
+            android:id="@+id/tv_tax_rate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:textFontWeight="bold"
+            android:textSize="28dp"
+            android:text="15.0%"
+            android:paddingRight="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
             android:id="@+id/tv_tax_name"
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:fontFamily="sans-serif"
+            android:textColor="@color/colorTextLight"
+            android:textFontWeight="bold"
             android:text="TaxName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_tax_rate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="15.00"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="3dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_tax_rate"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>

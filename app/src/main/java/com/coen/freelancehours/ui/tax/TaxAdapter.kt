@@ -19,7 +19,7 @@ class TaxAdapter(private var taxes : ArrayList<Tax>, private val context: Contex
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvTaxName.text = taxes[position].name
-        holder.tvTaxRate.text = taxes[position].rate.toString()
+        holder.tvTaxRate.text = taxes[position].rate.toString() + "%"
     }
 
     fun update(items : ArrayList<Tax>) {

@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_hours"
-        android:icon="@drawable/ic_hours"
-        android:title="@string/title_hours" />
+        android:id="@+id/navigation_tax"
+        android:icon="@drawable/ic_tax"
+        android:title="@string/title_tax" />
 
     <item
         android:id="@+id/navigation_project"
@@ -17,10 +17,9 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_tax"
-        android:icon="@drawable/ic_tax"
-        android:title="@string/title_tax" />
-
+        android:id="@+id/navigation_hours"
+        android:icon="@drawable/ic_hours"
+        android:title="@string/title_hours" />
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_user"
