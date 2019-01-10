@@ -8,33 +8,93 @@
     android:layout_marginTop="12dp"
     android:padding="10dp">
 
+    <View
+        android:layout_width="3dp"
+        android:layout_height="fill_parent"
+        android:background="@color/colorBlue" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/tv_hour_name"
             android:gravity="center"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="HourName"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/colorText"
+            android:textSize="22dp"
+            android:text="I worked on this and that"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_hour_rate"
-            android:layout_width="0dp"
+            android:id="@+id/tv_time"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="15.00"
+            android:textColor="@color/colorTextLight"
+            android:textStyle="italic"
+            android:textSize="13sp"
+            android:text="From 10:00 to 17:30"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hour_name"/>
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextLight"
+            android:textStyle="italic"
+            android:textSize="13sp"
+            android:text="At 18-12-2018"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time"/>
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:text="This is some description of a activity i have added."
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date"/>
+
+        <TextView
+            android:id="@+id/tv_revenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            android:textSize="24sp"
+            android:text="$105.87"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextLight"
+            android:textSize="14sp"
+            android:text="21% tax"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tax_rate"/>
+
+        <TextView
+            android:id="@+id/tv_tax_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTextLight"
+            android:textStyle="italic"
+            android:textSize="14sp"
+            android:text="$18.38 on tax"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -19,6 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="34sp"
+                android:textColor="@color/colorText"
                 android:text="@string/welcome_coen" />
 
             <android.support.constraint.ConstraintLayout

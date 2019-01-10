@@ -26,7 +26,7 @@ class ProjectAdapter(private val onClickCallback: (Project?) -> Unit) : Recycler
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.apply {
             tvProjectName.text = projects!![position].name
-            tvHourRate.text = "$" + projects!![position].hourRate.toString() + " per hour"
+            tvHourRate.text = "$" + round(projects!![position].hourRate) + " per hour"
             tvLogs.text = projects!![position].logs.toString() + " total logs"
             tvRevenue.text = "$" + projects!![position].revenue.toString() + " total revenue"
             tvHours.text = projects!![position].hours.toString() + " hours logged"
@@ -45,13 +45,17 @@ class ProjectAdapter(private val onClickCallback: (Project?) -> Unit) : Recycler
     fun getItem(position: Int): Project? {
         return projects?.get(position)
     }
+
+    private fun round(n: Double): String {
+        return String.format("%.2f", n)
+    }
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val tvProjectName = view.tv_project_name!!
     val tvHourRate = view.tv_hour_rate!!
     val cvProject = view.cv_project!!
-    val tvLogs = view.tv_logs!!
-    val tvRevenue = view.tv_revenue!!
-    val tvHours = view.tv_hours!!
+    val tvLogs = view.tv_date!!
+    val tvRevenue = view.tv_to!!
+    val tvHours = view.tv_from!!
 }

@@ -45,8 +45,8 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
         val logs = view.findViewById(R.id.tv_tl_value) as TextView
 
         revenue.text = "$${dashboardData?.total_revenue}"
-        projects.text = "$${dashboardData?.total_projects}"
-        hours.text = "$${dashboardData?.total_hours}"
-        logs.text = "$${dashboardData?.total_logs}"
+        projects.text = dashboardData?.total_projects.toString()
+        hours.text = dashboardData?.total_hours.toString()
+        logs.text = dashboardData?.total_logs.toString()
     }
 }

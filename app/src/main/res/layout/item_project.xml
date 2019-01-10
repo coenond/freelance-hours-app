@@ -14,7 +14,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_container"
         android:layout_width="match_parent"
-        android:layout_height="146dp"
+        android:layout_height="126dp"
         android:padding="24dp">
 
         <TextView
@@ -26,7 +26,7 @@
             android:textFontWeight="bold"
             android:paddingBottom="14dp"
             android:textColor="@color/colorText"
-            android:textSize="28dp"
+            android:textSize="22dp"
             android:text="Peakfijn" />
 
         <TextView
@@ -35,40 +35,40 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorText"
             android:textFontWeight="bold"
-            android:textSize="22sp"
+            android:textSize="14sp"
             android:text="$25 per hour"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_logs"
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorTextLight"
             android:textFontWeight="bold"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:text="25 total logs"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_hours"
+            android:id="@+id/tv_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorTextLight"
             android:textFontWeight="bold"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:text="12 hours"
-            app:layout_constraintTop_toTopOf="@+id/tv_logs"
+            app:layout_constraintTop_toTopOf="@+id/tv_date"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_revenue"/>
+            app:layout_constraintBottom_toBottomOf="@+id/tv_to"/>
 
         <TextView
-            android:id="@+id/tv_revenue"
+            android:id="@+id/tv_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorGreen"
             android:textFontWeight="bold"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:text="$1234 revenue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
