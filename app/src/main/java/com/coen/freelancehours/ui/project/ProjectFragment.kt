@@ -1,21 +1,16 @@
 package com.coen.freelancehours.ui.project
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import com.coen.freelancehours.R
 import com.coen.freelancehours.base.BaseFragment
 import com.coen.freelancehours.model.Project
 import com.coen.freelancehours.databinding.FragmentProjectBinding
-import com.coen.freelancehours.ui.dashboard.DashboardFragment
 import com.coen.freelancehours.ui.project.add.ProjectAddFragment
 import com.coen.freelancehours.util.SwipeToDelete
 import kotlinx.android.synthetic.main.fragment_project.*
@@ -75,14 +70,5 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding, ProjectViewModel>()
 
     private fun onProjectClick(project: Project) {
         sbMsg("Project ${project.name} clicked")
-    }
-
-    private fun refreshFragment() {
-        val fragment = ProjectFragment.newInstance()
-        val manager = fragmentManager
-        manager!!.beginTransaction()
-                .replace(R.id.content, fragment, fragment.javaClass.simpleName)
-                .addToBackStack(fragment.javaClass.simpleName)
-                .commit()
     }
 }

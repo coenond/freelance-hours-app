@@ -1,27 +1,20 @@
 package com.coen.freelancehours.ui.dashboard
 
+import android.annotation.SuppressLint
+import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.TextView
 import com.coen.freelancehours.R
-import com.coen.freelancehours.api.FreelanceHoursApi
-import com.coen.freelancehours.api.FreelanceHoursApiService
-import com.coen.freelancehours.api.response.project.ProjectSingleResponse
-import com.coen.freelancehours.model.Project
-import io.reactivex.SingleObserver
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import com.coen.freelancehours.base.BaseFragment
+import com.coen.freelancehours.databinding.FragmentDashboardBinding
+import com.coen.freelancehours.model.Dashboard
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewModel>() {
 
-    lateinit var freelanceHoursApiService: FreelanceHoursApiService
-    lateinit var project: Project
+    override fun getVMClass(): Class<DashboardViewModel> = DashboardViewModel::class.java
+    override fun initViewModelBinding() { binding.viewModel = viewModel }
+    override fun getLayoutId(): Int = R.layout.fragment_dashboard
 
     /**
      * Initialize newInstance for passing paameters
@@ -36,39 +29,24 @@ class DashboardFragment : Fragment() {
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var editTextHome = view.findViewById(R.id.editTextHome) as EditText
-
-        // Start API Service
-        freelanceHoursApiService = FreelanceHoursApi.start()
-        getProject()
+        viewModel.dashboardData.observe(this, Observer {
+            setValues(it, view)
+        })
     }
 
-    private fun getProject() {
-        Log.i("TAGZ", "GET_PROJECT")
-        freelanceHoursApiService.getProject(2)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(object : SingleObserver<ProjectSingleResponse> {
-                    override fun onSuccess(response: ProjectSingleResponse) {
-                        project = response.project
-                        sbMsg(project.toString())
-                    }
-                    override fun onError(e: Throwable) { sbMsg("error: " + e.message) }
-                    override fun onSubscribe(d: Disposable) { }
-                })
-    }
+    @SuppressLint("SetTextI18n")
+    private fun setValues(dashboardData: Dashboard?, view: View) {
+        val revenue = view.findViewById(R.id.tv_tr_value) as TextView
+        val projects = view.findViewById(R.id.tv_tp_value) as TextView
+        val hours = view.findViewById(R.id.tv_th_value) as TextView
+        val logs = view.findViewById(R.id.tv_tl_value) as TextView
 
-    fun sbMsg(msg: String) = Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+        revenue.text = "$${dashboardData?.total_revenue}"
+        projects.text = "$${dashboardData?.total_projects}"
+        hours.text = "$${dashboardData?.total_hours}"
+        logs.text = "$${dashboardData?.total_logs}"
+    }
 }

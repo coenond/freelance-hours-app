@@ -6,6 +6,11 @@
     android:layout_height="wrap_content"
     android:layout_margin="18dp">
 
+    <View
+        android:layout_width="3dp"
+        android:layout_height="fill_parent"
+        android:background="@color/colorRed" />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_container"
         android:layout_width="match_parent"

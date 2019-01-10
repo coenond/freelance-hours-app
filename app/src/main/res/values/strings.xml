@@ -20,4 +20,7 @@
     <string name="total_logs">Total logs</string>
     <string name="total_revenue">Total revenue</string>
     <string name="tax_rate">Tax rate</string>
+    <string name="total_projects">Total projects</string>
+    <string name="total_hours">Total hours</string>
+    <string name="welcome_coen">Welcome Coen</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.coen.freelancehours.api
 
+import com.coen.freelancehours.api.response.dashboard.DashboardSingleResponse
 import com.coen.freelancehours.api.response.tax.TaxAllResponse
 import com.coen.freelancehours.api.response.tax.TaxSingleResponse
 import com.coen.freelancehours.api.response.hour.HourAllResponse
@@ -10,6 +11,12 @@ import io.reactivex.Single
 import retrofit2.http.*
 
 interface FreelanceHoursApiService {
+
+    /**
+     * Dashboard Endpoints
+     */
+    @GET("dashboard")
+    fun getDashboard(): Single<DashboardSingleResponse>
 
     /**
      * Project Endpoints
