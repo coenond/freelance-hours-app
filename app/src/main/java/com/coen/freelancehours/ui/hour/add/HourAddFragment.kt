@@ -14,8 +14,11 @@ import kotlinx.android.synthetic.main.fragment_hour_add.*
 import java.util.*
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.widget.Adapter
+import android.widget.SpinnerAdapter
 import com.coen.freelancehours.ui.project.ProjectViewModel
 import java.text.SimpleDateFormat
+import kotlin.collections.ArrayList
 
 
 class HourAddFragment : BaseFragment<FragmentHourAddBinding, HourAddViewModel>() {
@@ -24,6 +27,13 @@ class HourAddFragment : BaseFragment<FragmentHourAddBinding, HourAddViewModel>()
     private var clock = Calendar.getInstance()
     private val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.GERMANY)
     private val stf = SimpleDateFormat("HH:mm", Locale.GERMANY)
+
+    private var projects = ArrayList<Project>()
+    private var taxes = ArrayList<Tax>()
+
+    private lateinit var spinProjectsAdapter: ArrayAdapter<Project>
+    private lateinit var spinTaxesAdapter: ArrayAdapter<Tax>
+
     override fun getVMClass(): Class<HourAddViewModel> = HourAddViewModel::class.java
     override fun initViewModelBinding() { binding.viewModel = viewModel }
     override fun getLayoutId(): Int = R.layout.fragment_hour_add
@@ -42,6 +52,22 @@ class HourAddFragment : BaseFragment<FragmentHourAddBinding, HourAddViewModel>()
     }
 
     private fun initObservers() {
+        viewModel.projectList?.observe(this, Observer {
+            it?.let { newProjects ->
+                projects.clear()
+                projects.addAll(newProjects)
+                spinProjectsAdapter.notifyDataSetChanged()
+            }
+        })
+
+        viewModel.taxList?.observe(this, Observer {
+            it?.let { newTaxes ->
+                taxes.clear()
+                taxes.addAll(newTaxes)
+                spinTaxesAdapter.notifyDataSetChanged()
+            }
+        })
+
         viewModel.status.observe(this, Observer {
             sbMsg("Hour ${viewModel.name.value} added.")
 
@@ -77,15 +103,10 @@ class HourAddFragment : BaseFragment<FragmentHourAddBinding, HourAddViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initObservers()
+        spinProjectsAdapter = ArrayAdapter(context!!, R.layout.support_simple_spinner_dropdown_item, projects)
+        spinTaxesAdapter = ArrayAdapter(context!!, R.layout.support_simple_spinner_dropdown_item, taxes)
 
-        val projects = arrayOf(Project(1, "Some Project", 25.0, 1, 1, 1, 1), Project(2, "Other Project", 25.0, 1, 1, 1, 1))
-        val taxes = arrayOf(Tax(1, "BTW Hoog", 21.0), Tax(2, "BTW Laag", 9.0))
-
-        val spinProjectsAdapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, projects)
         sp_project.adapter = spinProjectsAdapter
-
-        val spinTaxesAdapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, taxes)
         sp_tax.adapter = spinTaxesAdapter
 
         et_date.setOnClickListener {
@@ -120,6 +141,8 @@ class HourAddFragment : BaseFragment<FragmentHourAddBinding, HourAddViewModel>()
 
             viewModel.onSubmitClick()
         }
+
+        initObservers()
     }
 
     private fun formatStartedAt(): String {

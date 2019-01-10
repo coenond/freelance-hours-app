@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class FreelanceHoursApi {
 
     companion object {
-        private const val baseUrl = "http://flh.api.192.168.178.16.xip.io/api/"
+        private const val baseUrl = "http://flh.api.192.168.43.230.xip.io/api/"
 
         fun start(): FreelanceHoursApiService {
             val okHttpClient = OkHttpClient.Builder()
