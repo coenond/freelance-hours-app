@@ -3,12 +3,16 @@ package com.coen.freelancehours.ui.dashboard
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.view.View
 import android.widget.TextView
 import com.coen.freelancehours.R
 import com.coen.freelancehours.base.BaseFragment
 import com.coen.freelancehours.databinding.FragmentDashboardBinding
 import com.coen.freelancehours.model.Dashboard
+import com.coen.freelancehours.ui.hour.add.HourAddFragment
+import com.coen.freelancehours.ui.project.add.ProjectAddFragment
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewModel>() {
 
@@ -35,6 +39,16 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding, DashboardViewMo
         viewModel.dashboardData.observe(this, Observer {
             setValues(it, view)
         })
+
+        btn_add_hours.setOnClickListener {
+            val fragment = HourAddFragment.newInstance()
+            addFragment(fragment)
+        }
+
+        btn_add_project.setOnClickListener {
+            val fragment = ProjectAddFragment.newInstance()
+            addFragment(fragment)
+        }
     }
 
     @SuppressLint("SetTextI18n")

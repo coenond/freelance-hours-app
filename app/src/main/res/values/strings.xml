@@ -23,4 +23,6 @@
     <string name="total_projects">Total projects</string>
     <string name="total_hours">Total hours</string>
     <string name="welcome_coen">Welcome Coen</string>
+    <string name="add_new_hours">Add new hours</string>
+    <string name="add_new_project">Add new project</string>
 </resources>
